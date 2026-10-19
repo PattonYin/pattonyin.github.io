@@ -123,7 +123,7 @@ async function renderPortfolioPost(project, content) {
                 <div class="tag-list">${project.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
                 <h1 class="page-title">${escapeHtml(project.title)}</h1>
                 ${renderPortfolioDate(project.date)}
-                <p class="page-subtitle">${escapeHtml(project.description)}</p>
+                ${project.showSubtitle === false ? '' : `<p class="page-subtitle">${escapeHtml(project.description)}</p>`}
             </header>
             <div class="prose">${prose.innerHTML}</div>
             <a class="back-link portfolio-bottom-link" href="${escapeHtml(siteUrl('portfolio.html'))}">&larr; All snapshots</a>

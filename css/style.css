@@ -994,9 +994,17 @@ html:not([data-theme="dark"]) .icon-sun {
 }
 
 .portfolio-post .prose figure img,
-.portfolio-post .prose figure video {
+.portfolio-post .prose figure video,
+.portfolio-post .prose figure .umi-example-frame {
     display: block;
     margin: 0 0 0.5rem;
+}
+
+.umi-example-frame {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 0.25rem;
 }
 
 .portfolio-post .prose video {
@@ -1008,6 +1016,23 @@ html:not([data-theme="dark"]) .icon-sun {
     font-size: 0.8rem;
     line-height: 1.5;
     opacity: 0.75;
+}
+
+.recording-panel-map {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: 1rem 0 2rem;
+}
+
+.recording-panel-map td {
+    border: 1px solid var(--border);
+    padding: 0.75rem 0.5rem;
+    text-align: center;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+    font-size: 0.85rem;
+    line-height: 1.5;
 }
 
 .portfolio-bottom-link {

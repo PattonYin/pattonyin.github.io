@@ -1,4 +1,4 @@
-Credits: [Mingxi Jia](https://mingxi-jia.github.io/) · [DUO Policy paper](https://mingxi-jia.github.io/papers/duo_policy.pdf)
+[Mingxi Jia](https://mingxi-jia.github.io/) · [DUO Policy paper](https://mingxi-jia.github.io/papers/duo_policy.pdf)
 
 <figure>
   <video controls playsinline preload="none" poster="assets/rollouts/franka-coffee-making.jpg" aria-label="Franka robot making coffee">
