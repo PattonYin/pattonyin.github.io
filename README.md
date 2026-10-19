@@ -130,8 +130,9 @@ on desktop and above it on mobile; figures are shown without cropping.
 
 Each robot system has a "View rollout videos" button linking to its gallery:
 `rollouts/kuka.html` or `rollouts/franka.html`. The Franka gallery includes
-two Nutella picking videos, the intervention timing rollout, and a coffee-making video. Galleries without
-videos show "Rollout videos coming soon".
+DUO Policy videos of desk cleanup, candy sorting, and K-Cup coffee making,
+followed by Coffee Making, two Nutella picking videos, and the intervention timing rollout.
+Galleries without videos show "Rollout videos coming soon".
 
 To add videos, put web-ready MP4 files and optional poster images in
 `assets/rollouts/`, then add records to the matching `videos` array in
@@ -149,6 +150,7 @@ To add videos, put web-ready MP4 files and optional poster images in
 `title` and `src` are required; `poster` and `description` are optional.
 For a video featured in a snapshot, add `snapshot` with its site-relative URL
 (and optional section anchor) to make the video title link to that snapshot.
+For an external project website, add `project` with its full URL instead.
 Existing videos in `assets/portfolio/` can be reused directly, including WebM clips.
 Videos use native playback controls and load only when played.
 

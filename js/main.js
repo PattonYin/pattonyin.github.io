@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ============================================
 // Theme Management
 // ============================================
-// The initial data-theme is set by an inline script in <head> so there is no
+// The initial theme and palette are set by an inline script in <head> so there is no
 // flash of the wrong palette. Here we only wire up the toggle and keep the
 // highlight.js stylesheet in sync.
 
@@ -66,11 +66,6 @@ function updateHighlightTheme(theme) {
 
 function initPalette() {
     const paletteToggle = document.getElementById('palette-toggle');
-    const saved = localStorage.getItem('palette');
-
-    if (saved) {
-        document.documentElement.setAttribute('data-palette', saved);
-    }
 
     if (paletteToggle) {
         paletteToggle.addEventListener('click', () => {

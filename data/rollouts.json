@@ -16,6 +16,30 @@
     "description": "Rollout videos from the Franka Emika Panda with a Robotiq 2F-85 gripper.",
     "videos": [
       {
+        "title": "DUO Policy — Desk Cleanup",
+        "src": "assets/rollouts/franka-duo-desk-cleanup.mp4",
+        "poster": "assets/rollouts/franka-duo-desk-cleanup.jpg",
+        "project": "https://mingxi-jia.github.io/duo_policy_site/"
+      },
+      {
+        "title": "DUO Policy — Candy Sorting",
+        "src": "assets/rollouts/franka-duo-candy-sorting.mp4",
+        "poster": "assets/rollouts/franka-duo-candy-sorting.jpg",
+        "project": "https://mingxi-jia.github.io/duo_policy_site/"
+      },
+      {
+        "title": "DUO Policy — K-Cup Coffee Making",
+        "src": "assets/rollouts/franka-duo-kcup-coffee.mp4",
+        "poster": "assets/rollouts/franka-duo-kcup-coffee.jpg",
+        "project": "https://mingxi-jia.github.io/duo_policy_site/"
+      },
+      {
+        "title": "Coffee Making",
+        "src": "assets/rollouts/franka-coffee-making.mp4",
+        "poster": "assets/rollouts/franka-coffee-making.jpg",
+        "snapshot": "portfolio/coffee-making.html"
+      },
+      {
         "title": "Nutella Picking — Rollout 1",
         "src": "assets/rollouts/franka-nutella-picking-1.mp4",
         "poster": "assets/rollouts/franka-nutella-picking-1.jpg"
@@ -30,12 +54,6 @@
         "src": "assets/portfolio/intervention-timing.mp4",
         "poster": "assets/portfolio/intervention-timing.jpg",
         "snapshot": "portfolio/intervention-timing.html"
-      },
-      {
-        "title": "Coffee Making",
-        "src": "assets/rollouts/franka-coffee-making.mp4",
-        "poster": "assets/rollouts/franka-coffee-making.jpg",
-        "snapshot": "portfolio/coffee-making.html"
       }
     ]
   }

@@ -53,9 +53,10 @@ async function loadRollouts() {
 
             const caption = document.createElement('figcaption');
             const heading = document.createElement('h2');
-            if (recording.snapshot) {
+            const titleUrl = recording.project || recording.snapshot;
+            if (titleUrl) {
                 const link = document.createElement('a');
-                link.href = siteUrl(recording.snapshot);
+                link.href = siteUrl(titleUrl);
                 link.textContent = recording.title;
                 heading.append(link);
             } else {
