@@ -106,6 +106,7 @@
                 <ul class="nav-links">
                     <li><a href="#about" class="nav-link">About<span class="nav-link-line"></span></a></li>
                     <li><a href="#publications" class="nav-link">Publications<span class="nav-link-line"></span></a></li>
+                    <li><a href="#portfolio" class="nav-link">Snapshots<span class="nav-link-line"></span></a></li>
                     <li><a href="#robots" class="nav-link">Others<span class="nav-link-line"></span></a></li>
                 </ul>
                 <div class="appearance-controls">
@@ -127,7 +128,7 @@
                     </div>
                     <div class="prose container-narrow">
                         <p>
-                            Hi, I'm a master's student in Computer Science at Brown University. I work in the Humans to Robots Laboratory (H2R) under Professor Stefanie Tellex. My research interests include cross embodiment learning, egocentric manipulation, and policy learning with human intervention. I'm passionate about making robot learning more data-efficient, and leveraging different data source to make it more capable.
+                            Hi, I'm a master's student in Computer Science at Brown University. I work in the Humans to Robots Laboratory (H2R) under Professor Stefanie Tellex. My research interests include cross embodiment learning, egocentric manipulation, and policy learning with human intervention. I enjoy seeing the robots move, and I'm passionate about making robot learning more data-efficient, and leveraging different data source to make it more capable.
                         </p>
                     </div>
                 </section>
@@ -140,6 +141,18 @@
                     <div class="item-list" id="publications-list">
                         <!-- Loaded from data/content.json -->
                     </div>
+                </section>
+
+                <hr class="divider">
+
+                <!-- Robotics Snapshots -->
+                <section id="portfolio" class="section">
+                    <h2 class="section-title">Robotics Snapshots</h2>
+                    <p class="body-sm section-lede">Photos, videos, and short notes from my recent robotics work.</p>
+                    <div class="portfolio-grid" id="portfolio-grid" aria-busy="true">
+                        <p class="loading" role="status">Loading snapshots...</p>
+                    </div>
+                    <a class="back-link portfolio-bottom-link" href="portfolio.html">View all snapshots &rarr;</a>
                 </section>
 
                 <hr class="divider">
@@ -159,7 +172,9 @@
                                     3D view unavailable — your browser may have WebGL disabled.
                                 </p>
                             </div>
-                            <div class="viewer-toolbar"></div>
+                            <div class="viewer-toolbar">
+                                <a class="btn rollout-link" href="rollouts/kuka.html" aria-label="View KUKA rollout videos">View rollout videos &rarr;</a>
+                            </div>
                             <figcaption>
                                 <span class="viewer-title">2&times; KUKA LBR iiwa + HandUMI</span>
                                 <span class="body-xs">Bimanual manipulation &middot; 7-DOF each &middot; model shown: iiwa&nbsp;14 R820</span>
@@ -172,7 +187,9 @@
                                     3D view unavailable — your browser may have WebGL disabled.
                                 </p>
                             </div>
-                            <div class="viewer-toolbar"></div>
+                            <div class="viewer-toolbar">
+                                <a class="btn rollout-link" href="rollouts/franka.html" aria-label="View Franka rollout videos">View rollout videos &rarr;</a>
+                            </div>
                             <figcaption>
                                 <span class="viewer-title">Franka Emika Panda + Robotiq 2F-85</span>
                                 <span class="body-xs">Single-arm manipulation &middot; 7-DOF, 855&nbsp;mm reach</span>
@@ -210,6 +227,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/blog.js"></script>
+    <script src="js/portfolio.js"></script>
+    <script src="js/analytics.js" defer></script>
     <script type="module" src="js/robots.js"></script>
 </body>
 </html>

@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "generalist-style-umi",
+    "title": "Generalist-style UMI",
+    "date": "2026-10-12",
+    "description": "Recordings from adapting a Generalist-style UMI setup for the lab, with gripper-camera views and pose-tracking previews.",
+    "cover": "assets/portfolio/generalist-style-umi.jpg",
+    "coverAlt": "Wrist-camera views beside a 3D reconstruction and ArUco tracking diagnostics",
+    "tags": ["Egocentric capture", "Pose tracking"]
+  },
+  {
+    "slug": "hand-umi",
+    "title": "HandUMI",
+    "date": "2026-08-02",
+    "description": "Videos of my HandUMI data-collection setup and a closer look at the recorded demonstrations.",
+    "cover": "assets/portfolio/hand-umi-data-collection.jpg",
+    "coverAlt": "HandUMI data collection with two handheld grippers and a head-mounted camera at the lab workbench",
+    "tags": ["Manipulation", "Data visualization"]
+  },
+  {
+    "slug": "avp-realsense",
+    "title": "AVP + RealSense: Gaze & Reconstruction",
+    "date": "2026-07-29",
+    "description": "A head-mounted RealSense setup for gaze experiments, with calibrated motion mapping from Apple Vision Pro to RealSense for point-cloud reconstruction.",
+    "cover": "assets/portfolio/avp-realsense-head-mount.jpg",
+    "coverAlt": "Apple Vision Pro worn with a head-mounted RealSense camera for gaze experiments",
+    "tags": ["Gaze", "Calibration", "3D reconstruction"]
+  },
+  {
+    "slug": "coffee-making",
+    "title": "Coffee Making",
+    "date": "2026-03-27",
+    "description": "robots finally making coffee!",
+    "cover": "assets/rollouts/franka-coffee-making.jpg",
+    "coverAlt": "Franka robot making coffee at a coffee machine",
+    "tags": []
+  },
+  {
+    "slug": "intervention-timing",
+    "title": "Intervention Timing Experiment",
+    "date": "2026-02-02",
+    "description": "A rollout and brief notes on how intervention timing affects policy performance.",
+    "cover": "assets/portfolio/intervention-timing.jpg",
+    "coverAlt": "Robot arm and gripper above a workbench with objects and a tray during an intervention-timing rollout",
+    "tags": ["Human intervention", "Policy learning"]
+  },
+  {
+    "slug": "live-hand-detection",
+    "title": "Live Hand Detection Preview",
+    "date": "2026-03-01",
+    "description": "An early experiment with live hand detection using WiLoR, visualized alongside a point-cloud reconstruction of the workspace.",
+    "cover": "assets/portfolio/live-hand-detection.jpg",
+    "coverAlt": "Live hand detection visualized on a monitor alongside a point-cloud reconstruction of the lab workspace",
+    "tags": ["Hand detection", "3D visualization"]
+  }
+]

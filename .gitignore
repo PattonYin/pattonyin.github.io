@@ -1,8 +1,11 @@
-# Raw recordings: only publish compressed media in assets/gallery/.
+# Raw recordings: only publish compressed media in assets/.
 /Gallary/
+/data/portfolio/
+/data/rollouts/
 *.mov
 *.MOV
 *.webm
+!/assets/portfolio/umi-in-the-wild-cube-clip.webm
 
 # Local tooling and previews.
 /.claude/

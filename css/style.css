@@ -44,6 +44,10 @@ html[data-theme="dark"] {
     --surface: #1a1f2c;
 }
 
+html[data-theme="dark"] .portfolio-tile {
+    border-width: 1.5px;
+}
+
 /* dark_notepad */
 html[data-palette="notepad"][data-theme="dark"] {
     --background: #241f1c;
@@ -794,6 +798,194 @@ html:not([data-theme="dark"]) .icon-sun {
 }
 
 /* ===========================================
+   PORTFOLIO
+   =========================================== */
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.portfolio-tile {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.portfolio-tile:hover {
+    color: var(--foreground);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.portfolio-cover {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    background: #111827;
+    border-bottom: 1px solid var(--border);
+}
+
+.portfolio-tile-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1.25rem;
+}
+
+.portfolio-cover-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: var(--surface);
+    color: var(--foreground);
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.7;
+    border-bottom-style: dashed;
+}
+
+.portfolio-date {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.portfolio-post .portfolio-date {
+    margin-top: 0.75rem;
+}
+
+.portfolio-tile-title {
+    font-size: 1.15rem;
+}
+
+.portfolio-tile .card-desc {
+    font-weight: 400;
+}
+
+.portfolio-read {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--accent);
+}
+
+.portfolio-back {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.portfolio-back[hidden] {
+    display: none;
+}
+
+.portfolio-outline {
+    width: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+}
+
+.portfolio-outline ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 0.25rem;
+}
+
+.portfolio-outline li {
+    margin: 0;
+}
+
+.portfolio-outline a {
+    display: block;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.portfolio-outline a[aria-current="location"] {
+    font-weight: 700;
+}
+
+@media (min-width: 1025px) {
+    .sidebar:has(.portfolio-outline:not([hidden])) .sidebar-inner {
+        /* Subtract the sidebar's top padding and gap from the one-third position. */
+        min-height: calc(100vh / 3 - 5.5rem);
+        flex-shrink: 0;
+    }
+}
+
+.portfolio-post .prose h2 {
+    scroll-margin-top: 5rem;
+}
+
+.portfolio-post .page-header .tag-list {
+    margin-bottom: 1rem;
+}
+
+.portfolio-post .prose figure {
+    margin: 1.5rem 0 2rem;
+}
+
+.portfolio-post .prose .portfolio-media-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0 2rem;
+}
+
+.portfolio-post .prose .portfolio-media-pair figure {
+    min-width: 0;
+    margin: 0;
+}
+
+.portfolio-post .prose figure img,
+.portfolio-post .prose figure video {
+    display: block;
+    margin: 0 0 0.5rem;
+}
+
+.portfolio-post .prose video {
+    max-height: 75vh;
+    background: #111827;
+}
+
+.portfolio-post figcaption {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    opacity: 0.75;
+}
+
+.portfolio-bottom-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .portfolio-grid,
+    .portfolio-post .prose .portfolio-media-pair {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* ===========================================
    ROBOT VIEWERS
    =========================================== */
 
@@ -880,6 +1072,7 @@ html:not([data-theme="dark"]) .icon-sun {
 .viewer-toolbar {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 0.75rem;
     flex-wrap: wrap;
     min-height: 1.75rem;
@@ -896,6 +1089,52 @@ html:not([data-theme="dark"]) .icon-sun {
     font-weight: 700;
     letter-spacing: -0.01em;
     color: var(--foreground);
+}
+
+.rollout-link {
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    font-weight: 700;
+    background: var(--foreground);
+    border-color: var(--foreground);
+    color: var(--background);
+}
+
+.rollout-link:hover {
+    border-color: var(--foreground);
+    color: var(--background);
+    opacity: 0.85;
+}
+
+.rollout-empty {
+    grid-column: 1 / -1;
+    padding: 3rem 1.5rem;
+    border: 1px dashed var(--border);
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.rollout-video {
+    margin: 0;
+    min-width: 0;
+}
+
+.rollout-video video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    background: #111827;
+    border-radius: 0.25rem;
+}
+
+.rollout-video figcaption {
+    padding-top: 0.75rem;
+}
+
+.rollout-video h2 {
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
 }
 
 @media (max-width: 900px) {

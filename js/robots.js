@@ -569,11 +569,6 @@ class RobotViewer {
         if (this.payload) this.payload.rotation.y = t * 0.25;
     }
 
-    setPlaying(on) {
-        this.playing = on;
-        this.needsRender = true;
-    }
-
     loop() {
         requestAnimationFrame(this.loop);
 
@@ -602,29 +597,6 @@ class RobotViewer {
 }
 
 // ============================================
-// Playback controls
-// ============================================
-
-function buildControls(viewer) {
-    const bar = viewer.panel && viewer.panel.querySelector('.viewer-toolbar');
-    if (!bar) return;
-
-    const playBtn = document.createElement('button');
-    playBtn.className = 'btn btn-sm';
-    playBtn.type = 'button';
-    const syncLabel = () => {
-        playBtn.textContent = viewer.playing ? 'Pause' : 'Play';
-        playBtn.setAttribute('aria-label', viewer.playing ? 'Pause motion' : 'Play motion');
-    };
-    syncLabel();
-    playBtn.addEventListener('click', () => {
-        viewer.setPlaying(!viewer.playing);
-        syncLabel();
-    });
-    bar.appendChild(playBtn);
-}
-
-// ============================================
 // Init
 // ============================================
 
@@ -647,7 +619,6 @@ async function init() {
             await viewer.loadArms();
             panel?.classList.remove('viewer--loading');
             panel?.classList.add('viewer--ready');
-            buildControls(viewer);
         } catch (err) {
             console.error('Robot viewer failed:', err);
             panel?.classList.remove('viewer--loading');

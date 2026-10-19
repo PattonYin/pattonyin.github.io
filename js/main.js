@@ -1,5 +1,20 @@
 // Main JavaScript - Theme, Navigation, Content Loading
 
+// Resolve site assets from this script so nested pages also work on GitHub project sites.
+const siteRoot = new URL('../', document.currentScript.src);
+
+function siteUrl(path) {
+    return new URL(path, siteRoot).href;
+}
+
+function redirectLegacyPage(path, parameter) {
+    const target = new URL(siteUrl(path));
+    target.search = window.location.search;
+    target.searchParams.delete(parameter);
+    target.hash = window.location.hash;
+    window.location.replace(target.href);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initPalette();
@@ -73,7 +88,7 @@ function initPalette() {
 // scroll-margin-top on .section clears the sticky navbar).
 
 function initNavigation() {
-    let navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    let navLinks = Array.from(document.querySelectorAll('.nav-link[href^="#"]'));
     const sections = Array.from(document.querySelectorAll('.section[id]'));
 
     // Sections are optional; drop nav entries that point at ones not present so
@@ -127,7 +142,7 @@ function initNavigation() {
 
 async function loadContent() {
     try {
-        const response = await fetch('data/content.json');
+        const response = await fetch(siteUrl('data/content.json'));
         if (!response.ok) throw new Error('Failed to load content');
         const data = await response.json();
 

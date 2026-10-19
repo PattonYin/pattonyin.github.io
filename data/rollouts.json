@@ -1,0 +1,42 @@
+{
+  "kuka": {
+    "title": "KUKA Rollouts",
+    "description": "Rollout videos from the bimanual KUKA LBR iiwa system with HandUMI grippers.",
+    "videos": [
+      {
+        "title": "Cube Picking Online Inference",
+        "src": "assets/portfolio/umi-in-the-wild-cube-clip.webm",
+        "poster": "assets/portfolio/umi-in-the-wild-cube.jpg",
+        "snapshot": "portfolio/generalist-style-umi.html#in-the-wild-umi-cube-picking"
+      }
+    ]
+  },
+  "franka": {
+    "title": "Franka Rollouts",
+    "description": "Rollout videos from the Franka Emika Panda with a Robotiq 2F-85 gripper.",
+    "videos": [
+      {
+        "title": "Nutella Picking — Rollout 1",
+        "src": "assets/rollouts/franka-nutella-picking-1.mp4",
+        "poster": "assets/rollouts/franka-nutella-picking-1.jpg"
+      },
+      {
+        "title": "Nutella Picking — Rollout 2",
+        "src": "assets/rollouts/franka-nutella-picking-2.mp4",
+        "poster": "assets/rollouts/franka-nutella-picking-2.jpg"
+      },
+      {
+        "title": "Intervention Timing Experiment",
+        "src": "assets/portfolio/intervention-timing.mp4",
+        "poster": "assets/portfolio/intervention-timing.jpg",
+        "snapshot": "portfolio/intervention-timing.html"
+      },
+      {
+        "title": "Coffee Making",
+        "src": "assets/rollouts/franka-coffee-making.mp4",
+        "poster": "assets/rollouts/franka-coffee-making.jpg",
+        "snapshot": "portfolio/coffee-making.html"
+      }
+    ]
+  }
+}
