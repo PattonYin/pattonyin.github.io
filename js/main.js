@@ -18,6 +18,7 @@ function redirectLegacyPage(path, parameter) {
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initPalette();
+    initAppearanceControls();
     initNavigation();
     loadContent();
     initContactForm();
@@ -79,6 +80,21 @@ function initPalette() {
             localStorage.setItem('palette', next);
         });
     }
+}
+
+function initAppearanceControls() {
+    const controls = document.querySelector('.appearance-controls');
+    const navbar = document.querySelector('.navbar');
+    const socials = document.querySelector('.sidebar-socials');
+    if (!controls || !navbar || !socials) return;
+
+    const mobile = window.matchMedia('(max-width: 1024px)');
+    const updatePlacement = () => {
+        (mobile.matches ? socials : navbar).append(controls);
+        navbar.hidden = mobile.matches && !navbar.querySelector('.nav-links');
+    };
+    mobile.addEventListener('change', updatePlacement);
+    updatePlacement();
 }
 
 // ============================================

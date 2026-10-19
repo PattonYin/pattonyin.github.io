@@ -1,6 +1,6 @@
 """Build the website grippers without copying source CAD into the repository.
 
-Usage: python tools/convert_grippers.py /path/to/handumi_kuka
+Usage: python tools/convert_grippers.py /path/to/kiwi_robot_share
 Requires trimesh, fast-simplification, numpy and scipy. Run after convert_robots.py.
 """
 
@@ -35,7 +35,7 @@ def download(name):
     return path
 
 
-def compact(mesh):
+def compact(mesh, face_budget=FACE_BUDGET):
     if mesh.visual.kind in ("vertex", "face"):
         # The camera GLB uses five vertex colours in one mesh. Simplify each
         # colour region separately so decimation keeps its board/lens colours.
@@ -43,15 +43,15 @@ def compact(mesh):
         parts = []
         for index, color in enumerate(colors):
             part = mesh.submesh([np.flatnonzero(labels == index)], append=True)
-            budget = max(100, round(FACE_BUDGET * len(part.faces) / len(mesh.faces)))
+            budget = max(100, round(face_budget * len(part.faces) / len(mesh.faces)))
             if len(part.faces) > budget:
                 part = part.simplify_quadric_decimation(face_count=budget)
             part.visual = trimesh.visual.ColorVisuals(mesh=part, face_colors=color)
             parts.append(part)
         return trimesh.util.concatenate(parts)
     material = copy.deepcopy(mesh.visual.material) if hasattr(mesh.visual, "material") else None
-    if len(mesh.faces) > FACE_BUDGET:
-        mesh = mesh.simplify_quadric_decimation(face_count=FACE_BUDGET)
+    if len(mesh.faces) > face_budget:
+        mesh = mesh.simplify_quadric_decimation(face_count=face_budget)
     if material is not None:
         mesh.visual = trimesh.visual.TextureVisuals(material=material)
     return mesh
@@ -161,54 +161,55 @@ def urdf_origin(element):
     return result
 
 
-def handumi(source):
-    root = ET.parse(source / "handumi_kuka.urdf").getroot()
-    by_name = {link.get("name"): link for link in root.findall("link")}
-    children = {}
-    for joint in root.findall("joint"):
-        children.setdefault(joint.find("parent").get("link"), []).append(joint)
-    scenes = {name: trimesh.Scene() for name in ("body", "finger_left", "finger_right")}
-    joints = {}
-
-    def visit(name, frame, group):
-        for i, visual in enumerate(by_name[name].findall("visual")):
-            spec = visual.find("geometry/mesh")
-            loaded = trimesh.load(source / spec.get("filename"), force="scene")
-            scale = np.diag([*map(float, spec.get("scale", "1 1 1").split()), 1])
-            placement = frame @ urdf_origin(visual.find("origin")) @ scale
-            color = visual.find("material/color")
-            for node in loaded.graph.nodes_geometry:
-                local, geometry = loaded.graph[node]
-                mesh = compact(loaded.geometry[geometry].copy())
-                mesh.apply_transform(placement @ local)
-                if color is not None:
-                    colored(mesh, list(map(float, color.get("rgba").split())))
-                scenes[group].add_geometry(mesh, node_name=f"{name}_{i}_{node}")
-        for joint in children.get(name, []):
-            child = joint.find("child").get("link")
-            child_frame = frame @ urdf_origin(joint.find("origin"))
-            child_group = group
-            if joint.get("type") == "prismatic":
-                child_group = child
-                axis = child_frame[:3, :3] @ np.array(list(map(float, joint.find("axis").get("xyz").split())))
-                limit = joint.find("limit")
-                joints[child] = {"name": joint.get("name"), "type": "slide", "axis": axis.tolist(),
-                                 "range": [float(limit.get("lower")), float(limit.get("upper"))]}
-            visit(child, child_frame, child_group)
-
-    visit("assembly_root", np.eye(4), "body")
+def kiwi(source):
+    urdf = source / "urdf/kiwi_gripper.urdf"
+    root = ET.parse(urdf).getroot()
+    joints = {joint.find("child").get("link"): joint for joint in root.findall("joint")}
+    indices = {link.get("name"): i for i, link in enumerate(root.findall("link"))}
     links = []
-    for name, scene in scenes.items():
-        save_scene(scene, OUT / "handumi-kuka" / f"{name}.glb")
-        links.append({"name": f"handumi_{name}", "parent": -1 if name == "body" else 0,
-                      "pos": [0, 0, 0], "joint": joints.get(name), "mesh": f"../handumi-kuka/{name}.glb"})
-    motion = {joint["name"]: [0, joint["range"][1]] for joint in joints.values()}
-    attach("iiwa", links, [0, 0, 0.045], {"open": 0.037, "joints": motion})
+    motion = {}
+    for spec in root.findall("link"):
+        name = spec.get("name")
+        joint = joints.get(name)
+        frame = urdf_origin(joint.find("origin") if joint is not None else None)
+        link = {"name": name, "parent": indices[joint.find("parent").get("link")] if joint is not None else -1,
+                "pos": frame[:3, 3].tolist(), "quat": trimesh.transformations.quaternion_from_matrix(frame).tolist(),
+                "joint": None}
+        if joint is not None and joint.get("type") == "revolute":
+            limit = joint.find("limit")
+            limits = [float(limit.get("lower")), float(limit.get("upper"))]
+            link["joint"] = {"name": joint.get("name"), "type": "hinge",
+                             "axis": list(map(float, joint.find("axis").get("xyz").split())), "range": limits}
+            # Both jaws use the same opening angle on opposite hinge axes.
+            motion[joint.get("name")] = limits
+        scene = trimesh.Scene()
+        for visual in spec.findall("visual"):
+            mesh_spec = visual.find("geometry/mesh")
+            material = visual.find("material")
+            # The detailed servo loses small protrusions at the default budget.
+            budget = 12000 if material.get("name") == "servo" else FACE_BUDGET
+            mesh = trimesh.load(urdf.parent / mesh_spec.get("filename"), force="mesh")
+            if material.get("name") == "fasteners":
+                # Simplify each fastener separately so entire small bolts cannot disappear.
+                parts = mesh.split(only_watertight=False)
+                mesh = trimesh.util.concatenate([
+                    compact(part, max(100, round(budget * len(part.faces) / len(mesh.faces)))) for part in parts])
+            else:
+                mesh = compact(mesh, budget)
+            scale = np.diag([*map(float, mesh_spec.get("scale", "1 1 1").split()), 1])
+            mesh.apply_transform(urdf_origin(visual.find("origin")) @ scale)
+            rgba = list(map(float, material.find("color").get("rgba").split()))
+            scene.add_geometry(colored(mesh, rgba), node_name=material.get("name"))
+        if scene.geometry:
+            save_scene(scene, OUT / "kiwi-kuka" / f"{name}.glb")
+            link["mesh"] = f"../kiwi-kuka/{name}.glb"
+        links.append(link)
+    attach("iiwa", links, [0, 0, 0.045], {"open": 0.04, "joints": motion})
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("handumi_source", type=Path, help="Directory containing handumi_kuka.urdf")
+    parser.add_argument("kiwi_source", type=Path, help="Directory containing urdf/kiwi_gripper.urdf")
     args = parser.parse_args()
     robotiq()
-    handumi(args.handumi_source)
+    kiwi(args.kiwi_source)

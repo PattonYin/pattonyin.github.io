@@ -210,73 +210,107 @@
    "mesh": "link7.glb"
   },
   {
-   "name": "handumi_body",
+   "name": "kiwi_mount",
    "parent": 7,
    "pos": [
     0.0,
     0.0,
     0.045
    ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "joint": null,
-   "mesh": "../handumi-kuka/body.glb"
+   "mesh": "../kiwi-kuka/kiwi_mount.glb"
   },
   {
-   "name": "handumi_finger_left",
+   "name": "kiwi_left_jaw",
    "parent": 8,
    "pos": [
-    0,
-    0,
-    0
+    0.015,
+    -0.001187074146,
+    0.08333011544
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
    ],
    "joint": {
-    "name": "finger_left_joint",
-    "type": "slide",
+    "name": "kiwi_left_joint",
+    "type": "hinge",
     "axis": [
-     3.205103454691839e-09,
-     -1.0,
-     0.0
-    ],
-    "range": [
      0.0,
-     0.037
-    ]
-   },
-   "mesh": "../handumi-kuka/finger_left.glb"
-  },
-  {
-   "name": "handumi_finger_right",
-   "parent": 8,
-   "pos": [
-    0,
-    0,
-    0
-   ],
-   "joint": {
-    "name": "finger_right_joint",
-    "type": "slide",
-    "axis": [
-     -3.205103454691839e-09,
      1.0,
      0.0
     ],
     "range": [
      0.0,
-     0.037
+     0.7709113034
     ]
    },
-   "mesh": "../handumi-kuka/finger_right.glb"
+   "mesh": "../kiwi-kuka/kiwi_left_jaw.glb"
+  },
+  {
+   "name": "kiwi_right_jaw",
+   "parent": 8,
+   "pos": [
+    -0.015,
+    -0.001187074146,
+    0.08333011544
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "joint": {
+    "name": "kiwi_right_joint",
+    "type": "hinge",
+    "axis": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "range": [
+     0.0,
+     0.7709113034
+    ]
+   },
+   "mesh": "../kiwi-kuka/kiwi_right_jaw.glb"
+  },
+  {
+   "name": "kiwi_tcp",
+   "parent": 8,
+   "pos": [
+    0.0,
+    -0.003679085523,
+    0.2207559609
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "joint": null
   }
  ],
  "gripper": {
-  "open": 0.037,
+  "open": 0.04,
   "joints": {
-   "finger_left_joint": [
-    0,
-    0.037
+   "kiwi_left_joint": [
+    0.0,
+    0.7709113034
    ],
-   "finger_right_joint": [
-    0,
-    0.037
+   "kiwi_right_joint": [
+    0.0,
+    0.7709113034
    ]
   }
  }

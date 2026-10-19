@@ -154,7 +154,7 @@ Videos use native playback controls and load only when played.
 
 ## Robot models
 
-The Franka uses a Robotiq 2F-85. Both KUKA arms use the supplied HandUMI gripper
+The Franka uses a Robotiq 2F-85. Both KUKA arms use the supplied KIWI gripper
 and camera assembly; the left arm is orange and gray, and the right is white. Only compact
 GLBs are needed to serve the site. See [model attribution and regeneration](assets/robots/ATTRIBUTION.md)
 for sources and conversion commands.

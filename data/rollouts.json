@@ -1,7 +1,7 @@
 {
   "kuka": {
     "title": "KUKA Rollouts",
-    "description": "Rollout videos from the bimanual KUKA LBR iiwa system with HandUMI grippers.",
+    "description": "Rollout videos from the bimanual KUKA LBR iiwa system with KIWI grippers.",
     "videos": [
       {
         "title": "Cube Picking Online Inference",

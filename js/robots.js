@@ -2,7 +2,7 @@
 //
 // Uses the REAL robot meshes and kinematics, converted from MuJoCo Menagerie
 // into per-link GLB + kinematics.json by tools/convert_robots.py and
-// tools/convert_grippers.py (including the local HandUMI URDF). See
+// tools/convert_grippers.py (including the local KIWI URDF). See
 // assets/robots/ATTRIBUTION.md for sources and licences.
 //
 // ── Joint convention (matches the source MJCF, so real logs replay directly) ─
@@ -19,7 +19,7 @@
 //   { "<setup>": [ { "name": "...", "fps": 10, "loop": true,
 //                    "arms": [ { "q": [[j1..j7], ...], "grip": [0.04, ...] } ] } ] }
 // One `arms` entry per arm (2 for bimanual, 1 for panda). `grip` is optional,
-// in metres per finger for HandUMI; 0 to 0.04 maps closed to open for Robotiq.
+// 0 to 0.04 maps closed to open for KIWI and Robotiq.
 // With no file the viewers use a stationary ready pose.
 //
 // ── Adding props (tables, camera mounts, fixtures) ──────────────────────────
@@ -201,7 +201,7 @@ function instantiate({ kin, meshes }, armColor) {
             // disposing here would break every later instantiation.
             clone.traverse(o => {
                 o.userData.sharedAsset = true;
-                if (armColor && o.isMesh && !link.name.startsWith('handumi_') && link.name !== 'link7') {
+                if (armColor && o.isMesh && !link.name.startsWith('kiwi_') && link.name !== 'link7') {
                     o.material = Array.isArray(o.material)
                         ? o.material.map(m => armMaterial(m, armColor)) : armMaterial(o.material, armColor);
                 }
@@ -371,8 +371,8 @@ function sampleTrajectory(traj, t) {
 // Valid downward-facing poses when the optional motion file is unavailable.
 const REST_POSES = {
     iiwa: [
-        [-0.3196585, 0.2603071, -0.0455756, -1.7831835, 0.0131687, 1.0983954, -0.8696931],
-        [0.3155760, 0.2564195, 0.0463070, -1.7882477, -0.0131924, 1.0972239, 0.8663879]
+        [-0.2901448, 0.2048175, -0.0775955, -1.7361412, 0.0169082, 1.2012814, -0.8722318],
+        [0.3031760, 0.2173770, 0.0752481, -1.7206192, -0.0173680, 1.2042429, 0.8828850]
     ],
     panda: [[-0.0665258, -0.1958685, -0.0431810, -2.3595409, -0.0101313, 2.1638265, 0.9435765]]
 };
@@ -420,6 +420,8 @@ class RobotViewer {
         pmrem.dispose();
 
         this.controls = new OrbitControls(this.camera, canvas);
+        // OrbitControls sets touch-action: none; use the stylesheet's touch gestures.
+        canvas.style.removeProperty('touch-action');
         this.controls.enableDamping = true;
         this.controls.dampingFactor = 0.08;
         this.controls.enablePan = false;

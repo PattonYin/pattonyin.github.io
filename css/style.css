@@ -299,7 +299,11 @@ ul li::marker {
     transition: background 0.3s ease;
 }
 
-.navbar .appearance-controls {
+.navbar[hidden] {
+    display: none;
+}
+
+.appearance-controls {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -635,6 +639,25 @@ ul li::marker {
     border-color: var(--accent);
     color: var(--background);
     transform: translateY(-2px);
+}
+
+.appearance-controls .btn-icon {
+    border: none;
+    border-radius: 0.375rem;
+    background: transparent;
+    opacity: 0.7;
+}
+
+.appearance-controls .btn-icon:hover {
+    background: color-mix(in srgb, var(--foreground) 8%, transparent);
+    color: var(--accent);
+    opacity: 1;
+    transform: none;
+}
+
+.appearance-controls .icon {
+    width: 20px;
+    height: 20px;
 }
 
 /* Sun shows in dark mode, moon in light mode */
@@ -1026,7 +1049,7 @@ html:not([data-theme="dark"]) .icon-sun {
     width: 100%;
     height: 100%;
     cursor: grab;
-    touch-action: pan-y; /* let vertical page scroll win on touch */
+    touch-action: pan-y pinch-zoom; /* preserve page scrolling and zoom on touch */
 }
 
 .viewer-stage canvas:active {
@@ -1463,21 +1486,36 @@ html:not([data-theme="dark"]) .icon-sun {
     .sidebar-inner {
         flex-direction: row;
         text-align: left;
-        gap: 0.75rem;
+        gap: 1rem;
         align-items: center;
+        min-width: 0;
+        width: 100%;
     }
 
     .sidebar-text {
         align-items: flex-start;
+        min-width: 0;
     }
 
     .sidebar-socials {
         justify-content: flex-start;
+        gap: 0;
+    }
+
+    .sidebar-socials .appearance-controls {
+        gap: 0;
+        margin-left: 0.25rem;
     }
 
     .sidebar-avatar {
         width: 112px;
         height: 112px;
+        flex-shrink: 0;
+    }
+
+    .portfolio-outline,
+    .section-outline {
+        display: none;
     }
 
     .main-body {
@@ -1497,7 +1535,7 @@ html:not([data-theme="dark"]) .icon-sun {
     }
 
     .sidebar-inner {
-        gap: 0.5rem;
+        gap: 0.75rem;
     }
 
     .sidebar-avatar {
@@ -1515,14 +1553,30 @@ html:not([data-theme="dark"]) .icon-sun {
 
     .main-body {
         padding: 0.75rem 1rem;
+        overflow-wrap: anywhere;
+    }
+
+    .prose p {
+        font-size: 1rem;
+    }
+
+    .navbar {
+        padding: 0.5rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
     }
 
     .nav-links {
-        gap: 1rem;
+        flex: 1 1 100%;
+        gap: 0.25rem 0.5rem;
     }
 
     .nav-link {
         font-size: 0.85rem;
+    }
+
+    .nav-link-line {
+        bottom: 0;
     }
 
     .card {
@@ -1536,7 +1590,38 @@ html:not([data-theme="dark"]) .icon-sun {
     }
 
     .footer {
+        padding: 1.5rem 1rem;
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+@media (max-width: 1024px), (pointer: coarse) {
+    .btn,
+    .btn-icon,
+    .social-link,
+    .nav-link,
+    .portfolio-outline a,
+    .back-link,
+    a.portfolio-read {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .social-link,
+    .nav-link,
+    .portfolio-outline a,
+    .back-link,
+    a.portfolio-read {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .social-link {
+        justify-content: center;
+    }
+
+    .back-link[hidden] {
+        display: none;
     }
 }
