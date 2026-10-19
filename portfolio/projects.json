@@ -6,7 +6,7 @@
     "description": "Recordings from adapting a Generalist-style UMI setup for the lab, with gripper-camera views and pose-tracking previews.",
     "cover": "assets/portfolio/generalist-style-umi.jpg",
     "coverAlt": "Wrist-camera views beside a 3D reconstruction and ArUco tracking diagnostics",
-    "tags": ["Egocentric capture", "Pose tracking"]
+    "tags": ["UMI", "Pose tracking"]
   },
   {
     "slug": "hand-umi",

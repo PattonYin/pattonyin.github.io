@@ -106,7 +106,10 @@ function initNavigation() {
 
     const setActive = (id) => {
         navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+            const active = link.getAttribute('href') === `#${id}`;
+            link.classList.toggle('active', active);
+            if (active) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
         });
     };
 

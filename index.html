@@ -98,17 +98,19 @@
                     </div>
                 </div>
             </div>
+            <nav class="section-outline" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#publications" class="nav-link">Publications</a></li>
+                    <li><a href="#portfolio" class="nav-link">Snapshots</a></li>
+                    <li><a href="#robots" class="nav-link">Others</a></li>
+                </ul>
+            </nav>
         </aside>
 
         <!-- Right Main -->
         <div class="main-content">
-            <nav class="navbar" aria-label="Main navigation">
-                <ul class="nav-links">
-                    <li><a href="#about" class="nav-link">About<span class="nav-link-line"></span></a></li>
-                    <li><a href="#publications" class="nav-link">Publications<span class="nav-link-line"></span></a></li>
-                    <li><a href="#portfolio" class="nav-link">Snapshots<span class="nav-link-line"></span></a></li>
-                    <li><a href="#robots" class="nav-link">Others<span class="nav-link-line"></span></a></li>
-                </ul>
+            <div class="navbar">
                 <div class="appearance-controls">
                     <button id="theme-toggle" class="btn-icon" aria-label="Toggle dark mode" title="Toggle dark mode">
                         <svg class="icon icon-sm icon-sun" aria-hidden="true"><use href="#i-sun"></use></svg>
@@ -118,7 +120,7 @@
                         <svg class="icon icon-sm" aria-hidden="true"><use href="#i-rss"></use></svg>
                     </button>
                 </div>
-            </nav>
+            </div>
 
             <main class="main-body animate-in">
                 <!-- About -->
@@ -164,35 +166,31 @@
                         I use and actively maintain these robot systems for my research, handling everything from calibration, kinematics, and control to teleoperation, data collection, and policy rollout.
                     </p>
                     <!-- <p class="body-xs section-lede">Drag to orbit, scroll to zoom.</p> -->
-                    <div class="viewer-grid">
-                        <figure class="viewer">
+                    <div class="viewer-grid portfolio-grid">
+                        <figure class="viewer portfolio-tile">
                             <div class="viewer-stage">
                                 <canvas data-robot-setup="bimanual" aria-label="3D view of an orange-and-gray left and white right KUKA LBR iiwa, both with HandUMI grippers"></canvas>
                                 <p class="viewer-fallback">
                                     3D view unavailable — your browser may have WebGL disabled.
                                 </p>
                             </div>
-                            <div class="viewer-toolbar">
-                                <a class="btn rollout-link" href="rollouts/kuka.html" aria-label="View KUKA rollout videos">View rollout videos &rarr;</a>
-                            </div>
-                            <figcaption>
-                                <span class="viewer-title">2&times; KUKA LBR iiwa + HandUMI</span>
-                                <span class="body-xs">Bimanual manipulation &middot; 7-DOF each &middot; model shown: iiwa&nbsp;14 R820</span>
+                            <figcaption class="portfolio-tile-body">
+                                <h3 class="portfolio-tile-title">2&times; KUKA LBR iiwa + HandUMI</h3>
+                                <p class="card-desc">Bimanual manipulation &middot; 7-DOF each &middot; model shown: iiwa&nbsp;14 R820</p>
+                                <a class="portfolio-read" href="rollouts/kuka.html" aria-label="View KUKA rollout videos">View rollout videos <span aria-hidden="true">&rarr;</span></a>
                             </figcaption>
                         </figure>
-                        <figure class="viewer">
+                        <figure class="viewer portfolio-tile">
                             <div class="viewer-stage">
                                 <canvas data-robot-setup="panda" aria-label="3D view of a Franka Emika Panda arm with a Robotiq 2F-85 gripper"></canvas>
                                 <p class="viewer-fallback">
                                     3D view unavailable — your browser may have WebGL disabled.
                                 </p>
                             </div>
-                            <div class="viewer-toolbar">
-                                <a class="btn rollout-link" href="rollouts/franka.html" aria-label="View Franka rollout videos">View rollout videos &rarr;</a>
-                            </div>
-                            <figcaption>
-                                <span class="viewer-title">Franka Emika Panda + Robotiq 2F-85</span>
-                                <span class="body-xs">Single-arm manipulation &middot; 7-DOF, 855&nbsp;mm reach</span>
+                            <figcaption class="portfolio-tile-body">
+                                <h3 class="portfolio-tile-title">Franka Emika Panda + Robotiq 2F-85</h3>
+                                <p class="card-desc">Single-arm manipulation &middot; 7-DOF, 855&nbsp;mm reach</p>
+                                <a class="portfolio-read" href="rollouts/franka.html" aria-label="View Franka rollout videos">View rollout videos <span aria-hidden="true">&rarr;</span></a>
                             </figcaption>
                         </figure>
                     </div>
